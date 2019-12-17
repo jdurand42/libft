@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_types_pf.c                                :+:      :+:    :+:   */
+/*   ft_dprint_types.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:52:01 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/17 12:56:55 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:57:01 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_dprintf.h"
 #include <stdio.h>
 
-void	print_char_pf(t_pfparams *data)
+void	dprint_char(t_dparams *data)
 {
 	char c;
 	char pc[2];
@@ -22,10 +22,10 @@ void	print_char_pf(t_pfparams *data)
 	pc[0] = c;
 	pc[1] = 0;
 	data->prec = -1;
-	put_forrest_pf(pc, data);
+	dput_forrest(pc, data);
 }
 
-void	print_percent_pf(t_pfparams *data)
+void	dprint_percent(t_dparams *data)
 {
 	char c;
 	char pc[2];
@@ -34,20 +34,20 @@ void	print_percent_pf(t_pfparams *data)
 	pc[0] = c;
 	pc[1] = 0;
 	data->prec = -1;
-	put_forrest_pf(pc, data);
+	dput_forrest(pc, data);
 }
 
-void	print_random_char_pf(t_pfparams *data, char c)
+void	dprint_random_char(t_dparams *data, char c)
 {
 	char pc[2];
 
 	pc[0] = c;
 	pc[1] = 0;
 	data->prec = -1;
-	put_forrest_pf(pc, data);
+	dput_forrest(pc, data);
 }
 
-void	print_str_pf(t_pfparams *data)
+void	dprint_str(t_dparams *data)
 {
 	char *s_arg;
 
@@ -55,5 +55,5 @@ void	print_str_pf(t_pfparams *data)
 	if (!s_arg)
 		s_arg = ("(null)");
 	data->flags |= FLAG_STR;
-	put_forrest_pf(s_arg, data);
+	dput_forrest(s_arg, data);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bilbo_flaggings_pf.c                            :+:      :+:    :+:   */
+/*   ft_dbilbo_flaggings.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 12:19:26 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/17 12:56:57 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:56:58 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_dprintf.h"
 
-void	bilbo_flaggings_pf(char *s_flags, t_pfparams *data)
+void	dbilbo_flaggings(char *s_flags, t_dparams *data)
 {
 	int id;
 	int i;
@@ -26,7 +26,7 @@ void	bilbo_flaggings_pf(char *s_flags, t_pfparams *data)
 			data->flags |= (1 << 3);
 		while (s_flags[i])
 		{
-			id = get_id_pf(s_flags[i]);
+			id = dget_id(s_flags[i]);
 			if (id != -1)
 				data->flags |= (1 << id);
 			i++;
@@ -34,12 +34,12 @@ void	bilbo_flaggings_pf(char *s_flags, t_pfparams *data)
 	}
 	if (data->flags & FLAG_DOT)
 		data->prec = 0;
-	flags_forrest_pf(s_flags, data);
+	dflags_forrest(s_flags, data);
 	if ((data->flags & FLAG_ZERO) && (data->flags & FLAG_MINUS))
 		data->flags ^= FLAG_ZERO;
 }
 
-int		get_id_pf(char c)
+int		dget_id(char c)
 {
 	char	*flags_set;
 	int		i;
@@ -55,23 +55,23 @@ int		get_id_pf(char c)
 	return (-1);
 }
 
-void	flags_forrest_pf(char *s_flags, t_pfparams *data)
+void	dflags_forrest(char *s_flags, t_dparams *data)
 {
 	int i;
 
 	i = 0;
 	while (s_flags[i] == '0' || s_flags[i] == '-')
 		i++;
-	parse_width_pf(s_flags, data, &i);
+	dparse_width(s_flags, data, &i);
 	if (data->flags & FLAG_DOT)
 	{
 		if (s_flags[i] == '.')
 			i++;
-		parse_prec_pf(s_flags, data, &i);
+		dparse_prec(s_flags, data, &i);
 	}
 }
 
-void	parse_width_pf(char *s_flags, t_pfparams *data, int *i)
+void	dparse_width(char *s_flags, t_dparams *data, int *i)
 {
 	while (s_flags[*i] != 0 && s_flags[*i] != '.')
 	{
@@ -96,7 +96,7 @@ void	parse_width_pf(char *s_flags, t_pfparams *data, int *i)
 	}
 }
 
-void	parse_prec_pf(char *s_flags, t_pfparams *data, int *i)
+void	dparse_prec(char *s_flags, t_dparams *data, int *i)
 {
 	while (s_flags[*i] != 0 && (data->flags & FLAG_DOT))
 	{

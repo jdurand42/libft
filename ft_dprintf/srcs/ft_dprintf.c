@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 16:07:17 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/17 12:56:53 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:56:48 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_dprintf.h"
 
-void	free_flags_pf(char *s_flags)
+void	dfree_flags(char *s_flags)
 {
 	if (s_flags)
 	{
@@ -21,34 +21,34 @@ void	free_flags_pf(char *s_flags)
 	}
 }
 
-void	do_forrest_pf(char *s, t_pfparams *data, char *s_flags)
+void	ddo_forrest(char *s, t_dparams *data, char *s_flags)
 {
-	bilbo_flaggings_pf(s_flags, data);
+	dbilbo_flaggings(s_flags, data);
 	if (s[data->i] == 'c')
-		print_char_pf(data);
+		dprint_char(data);
 	else if (s[data->i] == 's')
-		print_str_pf(data);
+		dprint_str(data);
 	else if (s[data->i] == 'p')
-		print_void_pf(data);
+		dprint_void(data);
 	else if (s[data->i] == 'd' || s[data->i] == 'i')
-		print_int_pf(data);
+		dprint_int(data);
 	else if (s[data->i] == 'u')
-		print_usint_pf(data);
+		dprint_usint(data);
 	else if (s[data->i] == 'x')
-		print_hexa_pf(data);
+		dprint_hexa(data);
 	else if (s[data->i] == 'X')
-		print_up_hexa_pf(data);
+		dprint_up_hexa(data);
 	else if (s[data->i] == '%')
-		print_percent_pf(data);
+		dprint_percent(data);
 	else if (s[data->i] != 0)
-		print_random_char_pf(data, s[data->i]);
-	free_flags_pf(s_flags);
+		dprint_random_char(data, s[data->i]);
+	dfree_flags(s_flags);
 	if (s[data->i] == 0)
 		return ;
 	data->i += 1;
 }
 
-int		ft_isflag_pf(char c)
+int		dft_isflag(char c)
 {
 	int		i;
 	char	*str;
@@ -64,14 +64,14 @@ int		ft_isflag_pf(char c)
 	return (0);
 }
 
-char	*get_flags_pf(char *s, t_pfparams *data)
+char	*dget_flags(char *s, t_dparams *data)
 {
 	char	*s_flags;
 
 	s_flags = NULL;
 	data->i += 1;
 	data->j = data->i;
-	while (ft_isflag_pf(s[data->j]) || ft_isdigit(s[data->j]) ||
+	while (dft_isflag(s[data->j]) || ft_isdigit(s[data->j]) ||
 	s[data->j] == ' ')
 		data->j += 1;
 	s_flags = ft_strndup(&s[data->i], data->j - data->i);
@@ -80,12 +80,14 @@ char	*get_flags_pf(char *s, t_pfparams *data)
 	return (s_flags);
 }
 
-int		ft_printf(const char *str, ...)
+int		ft_dprintf(int fd, const char *str, ...)
 {
 	char		*s;
-	t_pfparams	data;
+	t_dparams	data;
 
-	ft_init_struct_pf(&data);
+	if (fd < 0)
+		return (0);
+	ft_dinit_struct(&data, fd);
 	va_start(data.ap, str);
 	s = (char *)str;
 	if (s[data.i] == 0)
@@ -94,11 +96,11 @@ int		ft_printf(const char *str, ...)
 	{
 		if (s[data.i] != '%')
 		{
-			ft_putchar(s[(data.i)++]);
+			ft_putchar_fd(data.fd, s[(data.i)++]);
 			data.count += 1;
 		}
 		else
-			do_forrest_pf(s, &data, get_flags_pf(s, &data));
+			ddo_forrest(s, &data, dget_flags(s, &data));
 	}
 	va_end(data.ap);
 	return (data.count);

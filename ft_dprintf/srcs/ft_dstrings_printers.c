@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strings_printers_pf.c                           :+:      :+:    :+:   */
+/*   ft_dstrings_printers.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:44:34 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/17 12:56:53 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:56:46 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_dprintf.h"
 
-void	ft_putstr_pf(char *s, t_pfparams *data)
+void	ft_dputstr_pf(char *s, t_dparams *data)
 {
 	size_t	len;
 
@@ -20,31 +20,31 @@ void	ft_putstr_pf(char *s, t_pfparams *data)
 	if (s[0] == 0 && !(data->flags & FLAG_STR))
 		len += 1;
 	if (data->prec > -1)
-		do_prec_s_pf(data, &len);
+		ddo_prec_s(data, &len);
 	if (!(data->flags & FLAG_MINUS))
-		print_width_s_pf(data, len);
-	write(1, s, len);
+		dprint_width_s(data, len);
+	write(data->fd, s, len);
 	data->count += len;
 	if (data->flags & FLAG_MINUS)
-		print_width_s_pf(data, len);
+		dprint_width_s(data, len);
 }
 
-void	put_forrest_pf(char *s, t_pfparams *data)
+void	dput_forrest(char *s, t_dparams *data)
 {
 	if (data->flags & FLAG_NUMBER)
-		print_numbers_pf(s, data);
+		dprint_numbers(s, data);
 	else
-		ft_putstr_pf(s, data);
+		ft_dputstr_pf(s, data);
 }
 
-void	do_prec_s_pf(t_pfparams *data, size_t *len)
+void	ddo_prec_s(t_dparams *data, size_t *len)
 {
 	if ((int)*len > data->prec)
 		*len = (int)data->prec;
 	return ;
 }
 
-void	print_width_s_pf(t_pfparams *data, size_t len)
+void	dprint_width_s(t_dparams *data, size_t len)
 {
 	int len_width;
 
@@ -54,9 +54,9 @@ void	print_width_s_pf(t_pfparams *data, size_t len)
 	while (len_width--)
 	{
 		if (!(data->flags & FLAG_ZERO))
-			ft_putchar(' ');
+			ft_putchar_fd(data->fd, ' ');
 		else
-			ft_putchar('0');
+			ft_putchar_fd(data->fd, '0');
 		data->count += 1;
 	}
 }

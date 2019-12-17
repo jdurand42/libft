@@ -6,7 +6,7 @@
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 17:27:05 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/12 17:02:36 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:57:45 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "./ft_printf/includes/ft_printf.h"
 # include "./get_next_line/get_next_line.h"
 # include "./bmp/includes/libbmp.h"
+# include "./ft_dprintf/includes/ft_dprintf.h"
 
 typedef struct	s_list
 {

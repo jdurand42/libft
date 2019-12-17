@@ -1,45 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_numbers_pf.c                                    :+:      :+:    :+:   */
+/*   ft_dnumbers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 16:07:29 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/17 12:56:56 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:56:59 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_dprintf.h"
 
-void	print_numbers_pf(char *s, t_pfparams *data)
+void	dprint_numbers(char *s, t_dparams *data)
 {
 	size_t	len;
 	char	buffer[1024];
 
 	len = ft_strlen(s);
-	check_number_pf(s, data, len);
+	dcheck_number(s, data, len);
 	buffer[0] = 0;
 	ft_strcat(buffer, s);
 	if (data->width == -1 && data->prec == -1)
 	{
-		write(1, s, len);
+		write(data->fd, s, len);
 		data->count += len;
 		return ;
 	}
 	if (data->prec >= 0)
-		do_prec_number_pf(data, s, buffer, (int)len);
+		ddo_prec_number(data, s, buffer, (int)len);
 	len = ft_strlen(buffer);
 	if (data->width > 0 && !(data->flags & FLAG_MINUS))
-		print_width_n_pf(data, buffer, (int)len);
+		dprint_width_n(data, buffer, (int)len);
 	len = ft_strlen(buffer);
-	write(1, buffer, len);
+	write(data->fd, buffer, len);
 	data->count += len;
 	if (data->width > 0 && (data->flags & FLAG_MINUS))
-		print_width_n_pf(data, buffer, (int)len);
+		dprint_width_n(data, buffer, (int)len);
 }
 
-void	check_number_pf(char *s, t_pfparams *data, size_t len)
+void	dcheck_number(char *s, t_dparams *data, size_t len)
 {
 	if ((data->flags & FLAG_DOT) && (data->flags & FLAG_ZERO) &&
 	data->prec >= 0)
@@ -52,7 +52,7 @@ void	check_number_pf(char *s, t_pfparams *data, size_t len)
 		data->width = -1;
 }
 
-void	do_prec_number_pf(t_pfparams *data, char *s, char *b, size_t len)
+void	ddo_prec_number(t_dparams *data, char *s, char *b, size_t len)
 {
 	int		len_0;
 	int		i;
@@ -81,7 +81,7 @@ void	do_prec_number_pf(t_pfparams *data, char *s, char *b, size_t len)
 	ft_strcpy(b, ft_strcat(buffer, s));
 }
 
-void	print_width_n_pf(t_pfparams *data, char *b, size_t len)
+void	dprint_width_n(t_dparams *data, char *b, size_t len)
 {
 	int len_0;
 	int i;
@@ -93,19 +93,19 @@ void	print_width_n_pf(t_pfparams *data, char *b, size_t len)
 	if (!(data->flags & FLAG_ZERO))
 		while (len_0--)
 		{
-			ft_putchar(' ');
+			ft_putchar_fd(data->fd, ' ');
 			data->count++;
 		}
 	else if (data->flags & FLAG_ZERO)
 	{
 		if (data->flags & FLAG_NEG)
 		{
-			ft_putchar('-');
+			ft_putchar_fd(data->fd, '-');
 			b = ft_strcpy(b, &b[1]);
 			data->count += 1;
 		}
 		data->count += len_0;
 		while (len_0--)
-			ft_putchar('0');
+			ft_putchar_fd(data->fd, '0');
 	}
 }

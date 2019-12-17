@@ -29,9 +29,8 @@ SRCS	=	ft_atoi.c \
 			ft_strmapi.c \
 			ft_strncmp.c ft_strnstr.c \
 			ft_strrchr.c ft_strtrim.c ft_substr.c \
-			ft_tolower.c ft_toupper.c
-
-BON		=	ft_atoi_base_bonus.c ft_base_isvalid_bonus.c \
+			ft_tolower.c ft_toupper.c \
+			ft_atoi_base_bonus.c ft_base_isvalid_bonus.c \
 			ft_biggerofthree_bonus.c ft_cmp_bonus.c \
 			ft_exp_bonus.c ft_fibonacci_bonus.c \
 			ft_find_next_prime_bonus.c ft_intlog_bonus.c \
@@ -62,26 +61,23 @@ BON		=	ft_atoi_base_bonus.c ft_base_isvalid_bonus.c \
 			ft_strncat_bonus.c ft_strncpy_bonus.c ft_strcpy_bonus.c \
 			ft_charstrcmp_bonus.c ft_itoa_base_ul_bonus.c \
 			ft_itoa_us_bonus.c ft_file_str_bonus.c \
-
-PF		=	./ft_printf/srcs/ft_printf.c ./ft_printf/srcs/ft_bilbo_flaggings_pf.c \
+			\
+			./ft_printf/srcs/ft_printf.c ./ft_printf/srcs/ft_bilbo_flaggings_pf.c \
 			./ft_printf/srcs/ft_initialisations_pf.c ./ft_printf/srcs/ft_numbers_pf.c \
 			./ft_printf/srcs/ft_print_types_pf.c ./ft_printf/srcs/ft_print_types2_pf.c \
-			./ft_printf/srcs/ft_strings_printers_pf.c
-
-BMP		=	./bmp/encode.c ./bmp/bitmap.c ./bmp/check.c ./bmp/header.c \
-			./bmp/rgb_encode.c ./bmp/utils.c
-
-GNL		=	./get_next_line/get_next_line.c
-
-GNLC	=	$(GNL:.c=.o)
+			./ft_printf/srcs/ft_strings_printers_pf.c \
+			\
+			./bmp/encode.c ./bmp/bitmap.c ./bmp/check.c ./bmp/header.c \
+			./bmp/rgb_encode.c ./bmp/utils.c \
+			\
+			./get_next_line/get_next_line.c \
+			\
+			./ft_dprintf/srcs/ft_dprintf.c ./ft_dprintf/srcs/ft_dprint_types.c \
+			./ft_dprintf/srcs/ft_dprint_types2.c \
+			./ft_dprintf/srcs/ft_dbilbo_flaggings.c ./ft_dprintf/srcs/ft_dstrings_printers.c \
+			./ft_dprintf/srcs/ft_dnumbers.c ./ft_dprintf/srcs/ft_dinitialisations.c
 
 OBJS	=	$(SRCS:.c=.o)
-
-BONUS	=	$(BON:.c=.o)
-
-PRINTF	=	$(PF:.c=.o)
-
-BMPS	=	$(BMP:.c=.o)
 
 CC		=	gcc
 
@@ -94,11 +90,8 @@ all		:	$(NAME)
 $(NAME) :	$(OBJS)
 			ar rc $(NAME) $(OBJS)
 
-bonus	:	$(OBJS) $(BONUS) $(PRINTF) $(GNLC) $(BMPS)
-			ar rc $(NAME) $(OBJS) $(BONUS) $(PRINTF) $(GNLC) $(BMPS)
-
 clean	:
-			$(RM) $(OBJS) $(BONUS) $(PRINTF) $(GNLC) $(BMPS)
+			$(RM) $(OBJS)
 
 fclean	:	clean
 			$(RM) $(NAME)

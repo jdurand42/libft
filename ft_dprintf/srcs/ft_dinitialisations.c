@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_initialisations_pf.c                            :+:      :+:    :+:   */
+/*   ft_dinitialisations.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 11:21:53 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/17 12:56:56 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:56:58 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_dprintf.h"
 
-void		ft_init_struct_pf(t_pfparams *data)
+void		ft_dinit_struct(t_dparams *data, int fd)
 {
 	data->count = 0;
+	data->fd = fd;
 	data->i = 0;
 	data->j = 0;
 }
 
-char		*ft_strjoin_free_pf(char const *s1, char const *s2)
+char		*ft_dstrjoin_free(char const *s1, char const *s2)
 {
 	unsigned int	megasize;
 	char			*b;
@@ -38,4 +39,31 @@ char		*ft_strjoin_free_pf(char const *s1, char const *s2)
 	ft_strcat(b, s2);
 	free((char*)s2);
 	return (b);
+}
+
+static int	ft_iswhitespace(char c)
+{
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
+	else
+		return (0);
+}
+
+int			ft_atoi_pos(char const *str)
+{
+	int	i;
+	int	resultat;
+
+	resultat = 0;
+	i = 0;
+	while (str[i] != '\0' && (ft_iswhitespace(str[i])))
+		i++;
+	if ((str[i] != '\0' && str[i] == '-') || str[i] == '+')
+		i++;
+	while (str[i] != '\0' && str[i] <= '9' && str[i] >= '0')
+	{
+		resultat = resultat * 10 + str[i] - '0';
+		i++;
+	}
+	return (resultat);
 }

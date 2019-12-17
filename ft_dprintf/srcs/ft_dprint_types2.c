@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_types2_pf.c                               :+:      :+:    :+:   */
+/*   ft_dprint_types2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 15:42:54 by jdurand           #+#    #+#             */
-/*   Updated: 2019/12/17 12:56:54 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/17 12:57:02 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/ft_dprintf.h"
 
-void	print_void_pf(t_pfparams *data)
+void	dprint_void(t_dparams *data)
 {
 	char			*s_adress;
 	unsigned long	ad_arg;
@@ -28,13 +28,13 @@ void	print_void_pf(t_pfparams *data)
 	else if (!(s_adress = ft_itoa_base_ul(ad_arg, HEXA)))
 		return ;
 	data->flags |= (1 << 4);
-	s_adress = ft_strjoin_free_pf("0x", s_adress);
-	put_forrest_pf(s_adress, data);
+	s_adress = ft_dstrjoin_free("0x", s_adress);
+	dput_forrest(s_adress, data);
 	free(s_adress);
 	s_adress = NULL;
 }
 
-void	print_int_pf(t_pfparams *data)
+void	dprint_int(t_dparams *data)
 {
 	char	*s_int;
 	int		i_arg;
@@ -48,12 +48,12 @@ void	print_int_pf(t_pfparams *data)
 	else if (!(s_int = ft_itoa(i_arg)))
 		return ;
 	data->flags |= (1 << 4);
-	put_forrest_pf(s_int, data);
+	dput_forrest(s_int, data);
 	free(s_int);
 	s_int = NULL;
 }
 
-void	print_usint_pf(t_pfparams *data)
+void	dprint_usint(t_dparams *data)
 {
 	char			*s_usint;
 	unsigned int	u_arg;
@@ -67,12 +67,12 @@ void	print_usint_pf(t_pfparams *data)
 	else if (!(s_usint = ft_itoa_us(u_arg)))
 		return ;
 	data->flags |= (1 << 4);
-	put_forrest_pf(s_usint, data);
+	dput_forrest(s_usint, data);
 	free(s_usint);
 	s_usint = NULL;
 }
 
-void	print_hexa_pf(t_pfparams *data)
+void	dprint_hexa(t_dparams *data)
 {
 	char			*s_hexa;
 	unsigned int	x_arg;
@@ -86,12 +86,12 @@ void	print_hexa_pf(t_pfparams *data)
 	else if (!(s_hexa = ft_itoa_base(x_arg, HEXA)))
 		return ;
 	data->flags |= (1 << 4);
-	put_forrest_pf(s_hexa, data);
+	dput_forrest(s_hexa, data);
 	free(s_hexa);
 	s_hexa = NULL;
 }
 
-void	print_up_hexa_pf(t_pfparams *data)
+void	dprint_up_hexa(t_dparams *data)
 {
 	char			*s_bighexa;
 	unsigned int	upx_arg;
@@ -105,7 +105,7 @@ void	print_up_hexa_pf(t_pfparams *data)
 	else if (!(s_bighexa = ft_itoa_base(upx_arg, BIG_HEXA)))
 		return ;
 	data->flags |= (1 << 4);
-	put_forrest_pf(s_bighexa, data);
+	dput_forrest(s_bighexa, data);
 	free(s_bighexa);
 	s_bighexa = NULL;
 }
