@@ -6,7 +6,7 @@
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 13:25:50 by jdurand           #+#    #+#             */
-/*   Updated: 2019/11/09 14:09:16 by jdurand          ###   ########.fr       */
+/*   Updated: 2019/12/19 17:20:18 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	parse_line(char *buffer, char *buffer_el, char **line, char *b_line)
 
 static int	parse_line3(char **line, char *b_line)
 {
-	if (!(*line = strdup(b_line)))
+	if (!(*line = ft_strdup(b_line)))
 		return (-1);
 	free(b_line);
 	b_line = NULL;
