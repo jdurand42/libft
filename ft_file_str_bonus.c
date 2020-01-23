@@ -6,7 +6,7 @@
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 11:57:08 by jdurand           #+#    #+#             */
-/*   Updated: 2019/11/07 18:39:56 by jdurand          ###   ########.fr       */
+/*   Updated: 2020/01/23 13:36:35 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_file_str(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	ft_putstr("connard");
 	while ((ret = read(fd, buffer, 32)) > 0)
 	{
 		buffer[ret] = 0;
@@ -32,7 +31,6 @@ char	*ft_file_str(int fd)
 		line = ft_strjoin(line, buffer);
 		free(b_line);
 		b_line = NULL;
-		ft_printf("%s\n", ret);
 	}
 	return (line);
 }

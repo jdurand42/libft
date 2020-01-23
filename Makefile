@@ -60,7 +60,7 @@ SRCS	=	ft_atoi.c \
 			ft_striteri_bonus.c \
 			ft_strncat_bonus.c ft_strncpy_bonus.c ft_strcpy_bonus.c \
 			ft_charstrcmp_bonus.c ft_itoa_base_ul_bonus.c \
-			ft_itoa_us_bonus.c ft_file_str_bonus.c \
+			ft_itoa_us_bonus.c ft_file_str_bonus.c ft_split_set.c \
 			\
 			./ft_printf/srcs/ft_printf.c ./ft_printf/srcs/ft_bilbo_flaggings_pf.c \
 			./ft_printf/srcs/ft_initialisations_pf.c ./ft_printf/srcs/ft_numbers_pf.c \
