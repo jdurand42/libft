@@ -6,7 +6,7 @@
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 17:27:05 by jdurand           #+#    #+#             */
-/*   Updated: 2020/01/23 16:41:22 by jdurand          ###   ########.fr       */
+/*   Updated: 2020/01/24 10:27:39 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ int				ft_charstrcmp(const char c, const void *s2);
 char			*ft_file_str(int fd);
 char			*ft_strncat_op(char *dest, char const *src, size_t n, size_t l);
 char			**ft_split_set(char const *s, char *set);
+t_list			*ft_strsplitlst(char const *s, char *set);
 
 #endif
