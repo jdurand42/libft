@@ -6,7 +6,7 @@
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 17:02:29 by jdurand           #+#    #+#             */
-/*   Updated: 2020/01/24 10:27:50 by jdurand          ###   ########.fr       */
+/*   Updated: 2020/01/24 10:32:37 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static int	count_words(char const *s, char *set)
 	size = 0;
 	while (s[i] != 0)
 	{
-		if (i > 0 && (ft_cmp(s[i], c)) && !(ft_cmp(s[i - 1], c)))
+		if (i > 0 && (ft_cmp_set(s[i], set)) && !(ft_cmp_set(s[i - 1], set)))
 			size++;
 		i++;
 	}
-	if (i > 0 && !(ft_cmp(s[i - 1], c)))
+	if (i > 0 && !(ft_cmp_set(s[i - 1], set)))
 		size++;
 	return (size);
 }
