@@ -6,7 +6,7 @@
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 17:27:05 by jdurand           #+#    #+#             */
-/*   Updated: 2020/01/24 10:27:39 by jdurand          ###   ########.fr       */
+/*   Updated: 2020/01/27 15:05:32 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			*ft_memset(void *dest, int c, size_t n);
 void			ft_memswap(void *a, void *b);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
-void			ft_putchar_fd(char c, int fd);
+void			ft_putchar_fd(int fd, char c);
 void			ft_putchar(char c);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putendl(char *s);
@@ -121,6 +121,6 @@ int				ft_charstrcmp(const char c, const void *s2);
 char			*ft_file_str(int fd);
 char			*ft_strncat_op(char *dest, char const *src, size_t n, size_t l);
 char			**ft_split_set(char const *s, char *set);
-t_list			*ft_strsplitlst(char const *s, char *set);
+t_list			*ft_splitlst(char const *s, char *set);
 
 #endif

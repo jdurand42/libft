@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_splitlst_set.c                                  :+:      :+:    :+:   */
+/*   ft_splitlst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdurand <jdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 17:02:29 by jdurand           #+#    #+#             */
-/*   Updated: 2020/01/24 10:32:37 by jdurand          ###   ########.fr       */
+/*   Updated: 2020/01/24 12:15:42 by jdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	count_words(char const *s, char *set)
 	return (size);
 }
 
-t_list		*ft_strsplitlst(char const *s, char *set)
+t_list		*ft_splitlst(char const *s, char *set)
 {
 	unsigned int	i;
 	unsigned int	st;
